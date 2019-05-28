@@ -67,6 +67,10 @@ class VendorAdmin(ImportMixin, admin.ModelAdmin):
     search_fields = ["title", "address", "email", "phone"]
 
     filter_horizontal = ["subjects", "types"]
+    fields = [
+        "title", "address", "geolocation", "phone", "email", "website", "description",
+        "subjects", "types",
+    ]
 
     formfield_overrides = {
         map_fields.AddressField: {
