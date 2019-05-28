@@ -48,7 +48,7 @@ setup(
     version=__version__,
     description="A vendor catalog app for Mezzanine",
     long_description=long_description,
-    url="https://gitlab.com/unplugstudio/mezzanine-vendors",
+    url="https://github.com/unplugstudio/mezzanine-vendors",
     author="Ed Rivas",
     author_email="ed@unplug.studio",
     license="MIT",
