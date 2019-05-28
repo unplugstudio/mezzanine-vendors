@@ -1,3 +1,13 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/unplugstudio/mezzanine-vendors/compare/v1.0.0...v1.1.0) (2019-05-28)
+
+
+### Features
+
+* don't re-process vendors with wrong addresses ([f8b4371](https://github.com/unplugstudio/mezzanine-vendors/commit/f8b4371))
+
+
+
 <a name="1.0.0"></a>
 # 1.0.0 (2019-05-28)
 
