@@ -2,6 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 import googlemaps
 
+from datetime import timedelta
 from django.db import models
 from django_google_maps import fields as map_fields
 from django.utils.timezone import now
@@ -49,15 +50,26 @@ class Vendor(TimeStamped, Titled):
     class Meta:
         ordering = ["title"]
 
+    @property
+    def geolocation_update_allowed(self):
+        """
+        Only allow geolocation updates if the vendor has been updated at least one minute
+        after the last geolocation attempt.
+
+        This is a crude way to make sure we don't continually attempt geolocation updates
+        on vendors that have wrong or nonexistent addresses.
+        """
+        if self.geolocation_updated is None:
+            return True
+        return (self.updated - self.geolocation_updated) > timedelta(seconds=60)
+
     def update_geolocation(self, force=False):
         """
         Attempt to get new coordinates based on a vendor's address.
         """
-        # Skip vendors with a failed attempt that haven't been updated since
-        if not force:
-            if self.geolocation_updated and self.geolocation_updated >= self.updated:
-                raise GeolocationError(
-                    "Vendor {} has not been updated since last geocode attempt".format(self))
+        if not force and not self.geolocation_update_allowed:
+            raise GeolocationError(
+                "{} has not been updated since last geocode attempt".format(self))
 
         error = None
         api = googlemaps.Client(key=settings.GOOGLE_MAPS_API_KEY)
@@ -70,6 +82,7 @@ class Vendor(TimeStamped, Titled):
         except IndexError:
             error = "No geolocation results found for {}".format(self)
 
+        # Always save to keep track of the latest geolocation attempt, even if failed
         self.geolocation_updated = now()
         self.save()
 
