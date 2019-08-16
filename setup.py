@@ -68,6 +68,7 @@ setup(
         "django>=1.11",
         "django-import-export>=1.2",
         "django_google_maps>=0.10",
+        "googlemaps>=3",
         "mezzanine>=4.3",
         "mezzy>=2.2",
     ],
