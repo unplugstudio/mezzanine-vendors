@@ -15,17 +15,17 @@ Install
 2. Install via pip: ``pip install mezzanine-vendors``.
 3. Add ``django_google_maps`` and ``import_export`` to ``INSTALLED_APPS``.
 4. Also add ``vendors`` after them.
-5. Include ``vendors.urls`` in your root urlconf.
-6. Run migrations.
+5. Add to your urlconf: ``url(r"^vendors/", include("vendors.urls", namespace="vendors"))``.
+6. Run migrations: ``python manage.py migrate vendors``.
 7. Create Vendors, Subjects, and Types using the admin interface.
-8. Create your own views
-
-**Note: This package provides the models, admin, and a JSON endpoint that returns the vendors. You'll need to create your own frontend to display them.**
+8. Access the vendor list by visiting `/vendors/`.
 
 Management Command
 ------------------
 
-Run ``python manage.py add_vendor_locations`` to add coordinates to vendors that are missing them (for example, vendors added via admin import). This uses Google's GeoCoder API and will fail if the address cannot be parsed. It will also count towards the usage limit of your Google Maps API key.
+Run ``python manage.py add_vendor_locations`` to add coordinates to vendors that are missing them (for example, vendors added via admin import which only have a human-readable address). This uses Google's GeoCoder API and will fail if the address cannot be parsed. It will also count towards the usage limit of your Google Maps API key.
+
+You can periodically run this command in a cronjob to make sure vendors added using the import feature have a valid geolocation.
 
 Contributing
 ------------
