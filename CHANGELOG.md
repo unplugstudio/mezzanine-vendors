@@ -1,3 +1,18 @@
+# [1.2.0](https://github.com/unplugstudio/mezzanine-vendors/compare/v1.1.2...v1.2.0) (2019-08-17)
+
+
+### Bug Fixes
+
+* add missing googlemaps dependency ([dca70ee](https://github.com/unplugstudio/mezzanine-vendors/commit/dca70ee))
+
+
+### Features
+
+* add default url app_name ([d794595](https://github.com/unplugstudio/mezzanine-vendors/commit/d794595))
+* add default vendor list template ([7157848](https://github.com/unplugstudio/mezzanine-vendors/commit/7157848))
+
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/unplugstudio/mezzanine-vendors/compare/v1.1.1...v1.1.2) (2019-05-31)
 
